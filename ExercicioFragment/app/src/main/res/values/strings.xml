@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ExercicioFragment</string>
+    <string name="text_change">INITIAL ACTIVITY TEXT</string>
+    <string name="red">RED</string>
+    <string name="green">GREEN</string>
+    <string name="blue">BLUE</string>
+    <string name="fragment_color_change">Color Selector</string>
+</resources>

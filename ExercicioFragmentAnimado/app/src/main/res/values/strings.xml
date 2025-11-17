@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ExercicioFragmentAnimado</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="fragment_settings">Fragment Settings</string>
+    <string name="red">RED COLOR</string>
+    <string name="blue">BLUE COLOR</string>
+    <string name="green">GREEN COLOR</string>
+</resources>
