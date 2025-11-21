@@ -1,25 +1,25 @@
 package br.edu.ucsal.contatosadapter;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 
 import br.edu.ucsal.contatosadapter.adapter.ContactAdapter;
-import br.edu.ucsal.contatosadapter.dao.DBDao;
 import br.edu.ucsal.contatosadapter.dto.ContactDto;
-import br.edu.ucsal.contatosadapter.model.Contact;
 import br.edu.ucsal.contatosadapter.service.ContactService;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ContactAdapter.ContactAdapterListener {
+
+    private ContactService service;
+    private ContactAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +32,30 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        ContactService service = new ContactService();
-        ArrayList<ContactDto> contactDtoToAdapter = service.getAllContacts();
+        service = new ContactService();
+        service.reset();
+
+        adapter = new ContactAdapter(service.getAllContacts(), this);
 
         RecyclerView recyclerView = findViewById(R.id.rv_card_contacts_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //Cria o adapter passando a lista de contatos já convertida
-        ContactAdapter adapter = new ContactAdapter(contactDtoToAdapter);
-
         recyclerView.setAdapter(adapter);
 
+        Button btnReset = findViewById(R.id.btn_reset);
+
+        btnReset.setOnClickListener(v -> {
+            service.reset();
+            adapter.setContacts(service.getAllContacts());
+            adapter.notifyDataSetChanged();
+        });
+
     }
+    public void onContactClick(ContactDto clickedContactDto, int position) {
+                if(position == RecyclerView.NO_POSITION) return;
+
+                Long id = clickedContactDto.getId();
+                service.remove(id);
+                adapter.setContacts(service.getAllContacts());
+            }
 }

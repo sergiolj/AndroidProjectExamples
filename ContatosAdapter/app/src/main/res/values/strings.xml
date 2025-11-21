@@ -5,4 +5,5 @@
     <string name="phone">phone: (71) 99999 1234</string>
     <string name="tittle">CONTACTS</string>
     <string name="reset">RESET</string>
+    <string name="id">Long Id</string>
 </resources>

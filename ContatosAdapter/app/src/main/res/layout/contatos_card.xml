@@ -40,6 +40,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
                 android:text="@string/phone" />
+
+            <TextView
+                android:id="@+id/tv_id"
+                style="@style/card_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/id" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
